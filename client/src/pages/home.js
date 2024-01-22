@@ -4,14 +4,16 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 
 const Home = () => {
-		const [movies, setMovies] = useState([]);
+		const[movies, setMovies] = useState([]);
 
     useEffect(() => {
 		const fetchMovies = async() => {
 			console.log("=== fetchMovies start ===");
 			try {
 				const response = await axios.get('api/getPopularMoives'); // apiエンドポイント呼び出し
-				console.log(response.data.results);
+				// console.log(response.data.results);
+				setMovies(response.data.results); // 更新用setMovies関数にデータが入る
+				console.log(movies);
 			} catch (error) {
 				console.log(error);
 			}
@@ -29,6 +31,9 @@ const Home = () => {
 				<Head>
 						<title>Laravel - home</title>
 				</Head>
+				{movies.map((movie) => (
+					<img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} width={100} />
+				))};
 
 				<div className="py-12">
 					<div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
