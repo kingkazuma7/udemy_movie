@@ -1,7 +1,23 @@
 import AppLayout from '@/components/Layouts/AppLayout'
+import axios from 'axios';
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 const Home = () => {
+
+    useEffect(() => {
+		const fetchMovies = async() => {
+			console.log("fetchMovies start");
+			try {
+				const response = await axios.get('api/getPopularMoives'); // apiエンドポイント呼び出し
+				console.log(response);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchMovies();
+    }, []);
+    
     return (
         <AppLayout
             header={
