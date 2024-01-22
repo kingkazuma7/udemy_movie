@@ -18,33 +18,33 @@ services:
     # 指定したサービスの後にコンテナを起動する
     depends_on:
       - php-db
-  php-db:
-    image: mysql:8.0
-    container_name: run-php-db
-    ports:
-      - "3307:3306"
-    # コンテナの環境変数を指定できる
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test
-      - MYSQL_DATABASE=test_db
-    # DBの永続化のボリュームも指定できる
-    volumes:
-      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
-      - mysql-data:/var/lib/mysql
-    networks:
-      - php-mysql-networks
+  # php-db:
+  #   image: mysql:8.0
+  #   container_name: run-php-db
+  #   ports:
+  #     - "3307:3306"
+  #   # コンテナの環境変数を指定できる
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  #     - MYSQL_USER=test
+  #     - MYSQL_PASSWORD=test
+  #     - MYSQL_DATABASE=test_db
+  #   # DBの永続化のボリュームも指定できる
+  #   volumes:
+  #     - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+  #     - mysql-data:/var/lib/mysql
+  #   networks:
+  #     - php-mysql-networks
   # DBをUIで確認できるツール
-  php-adminer:
-    container_name: adminer
-    image: adminer:4.8.1
-    ports:
-      - 8081:8080
-    networks:
-      - php-mysql-networks
-    depends_on:
-      - php-db
+  # php-adminer:
+  #   container_name: adminer
+  #   image: adminer:4.8.1
+  #   ports:
+  #     - 8081:8080
+  #   networks:
+  #     - php-mysql-networks
+  #   depends_on:
+  #     - php-db
 # 任意のボリュームを作る(DBの永続化用)
 volumes:
   mysql-data:
